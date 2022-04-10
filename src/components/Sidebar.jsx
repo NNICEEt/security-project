@@ -16,7 +16,7 @@ import {
   DrawerContent,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { LockIcon } from "@chakra-ui/icons";
+import { LockIcon, CloseIcon } from "@chakra-ui/icons";
 
 /*---------------------------------------- Util ----------------------------------------*/
 import { panel } from "../utils/panel";
@@ -113,11 +113,7 @@ const SidebarMobile = ({
           borderBottom={"1px"}
           borderColor={"blackAlpha.300"}
         >
-          <LockIcon
-            color={"green.400"}
-            fontSize={{ base: 24, sm: 28 }}
-            transform={"auto"}
-          />
+          <LockIcon color={"green.400"} fontSize={{ base: 24, sm: 28 }} />
           <Box
             display={"flex"}
             alignItems={"center"}
@@ -145,6 +141,15 @@ const SidebarMobile = ({
               Crytography
             </Heading>
           </Box>
+          <CloseIcon
+            display={{ base: "block", sm: "none" }}
+            fontSize={18}
+            position={"absolute"}
+            right={"5%"}
+            transform={"auto"}
+            translateY={"5%"}
+            onClick={onClose}
+          />
         </DrawerHeader>
         <DrawerBody pt={6}>
           <Tabs variant="unstyled" colorScheme="green">
