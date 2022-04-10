@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react";
-import { PanelContext } from "../Context/panel";
+import { PanelContext } from "../context/panel";
 
 /*---------------------------------------- UI Component ----------------------------------------*/
 import {
@@ -18,11 +18,14 @@ import {
 } from "@chakra-ui/react";
 import { LockIcon } from "@chakra-ui/icons";
 
+/*---------------------------------------- Util ----------------------------------------*/
+import { panel } from "../utils/panel";
+
 const menu = [
-  { label: "Caesar Cipher", value: 1 },
-  { label: "Vigenere", value: 2 },
-  { label: "Rail fence Cipher", value: 3 },
-  { label: "RSA", value: 4 },
+  { label: "Caesar Cipher", panel: panel.caesarCipher },
+  { label: "Vigenere Cipher", panel: panel.vigenereCipher },
+  { label: "Rail fence Cipher", panel: panel.railFenceCipher },
+  { label: "RSA", panel: panel.rsa },
 ];
 
 const Sidebar = ({ isOpen, onClose }) => {
@@ -63,16 +66,16 @@ const SidebarDesktop = ({ selectedPanel, setSelectedPanel }) => {
     >
       <Tabs variant="unstyled" colorScheme="green">
         <TabList display={"flex"} flexDirection="column" gap={5}>
-          {menu.map((item) => (
+          {menu.map((item, index) => (
             <Tab
-              key={item.value}
+              key={index}
               p={4}
               bgColor={
-                selectedPanel === item.value ? "green.200" : "transparent"
+                selectedPanel === item.panel ? "green.200" : "transparent"
               }
               borderRadius={10}
-              onClick={() => setSelectedPanel(item.value)}
-              _hover={selectedPanel !== item.value && { color: "green.400" }}
+              onClick={() => setSelectedPanel(item.panel)}
+              _hover={selectedPanel !== item.panel && { color: "green.400" }}
               _focus={{ outline: "none" }}
             >
               {item.label}
@@ -146,20 +149,20 @@ const SidebarMobile = ({
         <DrawerBody pt={6}>
           <Tabs variant="unstyled" colorScheme="green">
             <TabList display={"flex"} flexDirection="column" gap={5}>
-              {menu.map((item) => (
+              {menu.map((item, index) => (
                 <Tab
-                  key={item.value}
+                  key={index}
                   p={4}
                   bgColor={
-                    selectedPanel === item.value ? "green.200" : "transparent"
+                    selectedPanel === item.panel ? "green.200" : "transparent"
                   }
                   borderRadius={10}
                   onClick={() => {
-                    setSelectedPanel(item.value);
+                    setSelectedPanel(item.panel);
                     onClose();
                   }}
                   _hover={
-                    selectedPanel !== item.value && { color: "green.400" }
+                    selectedPanel !== item.panel && { color: "green.400" }
                   }
                   _focus={{ outline: "none" }}
                 >

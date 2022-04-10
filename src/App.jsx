@@ -1,13 +1,14 @@
-import { PanelProvider } from "./Context/panel";
+import { PanelProvider } from "./context/panel";
 
 /*---------------------------------------- Component ----------------------------------------*/
 import Layout, {
   TopbarLayout,
   SidebarLayout,
   ContentLayout,
-} from "./Layout/Layout";
+} from "./layout/Layout";
 import TopBar from "./components/TopBar";
 import Sidebar from "./components/Sidebar";
+import Panel from "./components/Panel";
 
 /*---------------------------------------- UI Component ----------------------------------------*/
 import { useDisclosure } from "@chakra-ui/react";
@@ -24,7 +25,9 @@ const App = () => {
         <SidebarLayout>
           <Sidebar isOpen={isOpen} onClose={onClose} />
         </SidebarLayout>
-        <ContentLayout>sdffs</ContentLayout>
+        <ContentLayout>
+          <Panel />
+        </ContentLayout>
       </Layout>
     </PanelProvider>
   );
