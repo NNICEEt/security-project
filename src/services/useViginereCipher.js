@@ -4,18 +4,21 @@ const useViginereCipher = () => {
     for (let i = 0; i < text.length; i++) {
       textCode.push(text.toUpperCase().charCodeAt(i));
     }
-
     const keyCode = [...Array(textCode.length)].map((_, index) =>
       key.toUpperCase().charCodeAt(index % key.length)
     );
-
     let cipher = "";
     const lowerCasePos = getPos(text);
     textCode.forEach((value, index) => {
-      let result = ((value + keyCode[index]) % 26) + 65; // mod ให้ค่าไม่เกิน 26
-      if (lowerCasePos.includes(index)) result = result + 32;
-      result = String.fromCharCode(result);
-      cipher += result;
+      if(value >= 32 && value <= 64){
+        cipher += String.fromCharCode(value);
+      }
+       else {
+        let result = ((value + keyCode[index]) % 26) + 65; // mod ให้ค่าไม่เกิน 26
+        if (lowerCasePos.includes(index)) result = result + 32;
+        result = String.fromCharCode(result);
+        cipher += result;
+      }
     });
     return cipher;
   };
@@ -33,14 +36,17 @@ const useViginereCipher = () => {
     let plaintext = "";
     const lowerCasePos = getPos(text);
     textCode.forEach((value, index) => {
-      let result = ((value - keyCode[index] + 26) % 26) + 65;
-      if (lowerCasePos.includes(index)) result = result + 32;
-      result = String.fromCharCode(result);
-      plaintext += result;
+      if(value >= 32 && value <= 64){
+        plaintext += String.fromCharCode(value);
+      } else {
+        let result = ((value - keyCode[index] + 26) % 26) + 65;
+        if (lowerCasePos.includes(index)) result = result + 32;
+        result = String.fromCharCode(result);
+        plaintext += result;
+      }
     });
     return plaintext;
   };
-
   const getPos = (text) => {
     const lowerCasePos = [];
     for (let i = 0; i < text.length; i++) {
@@ -51,8 +57,6 @@ const useViginereCipher = () => {
     }
     return lowerCasePos;
   };
-
   return { encrypt, decrypt };
 };
-
 export default useViginereCipher;
