@@ -5,11 +5,9 @@ const useViginereCipher = () => {
       textCode.push(text.toUpperCase().charCodeAt(i));
     }
 
-    const keyCode = [];
-    for (let i = 0; i < key.length; i++) {
-      keyCode.push(key.toUpperCase().charCodeAt(i));
-    }
-    keyCode.push(textCode.map((_, index) => keyCode[index % key.length]));
+    const keyCode = [...Array(textCode.length)].map(
+      (_, index) => key[index % key.length]
+    );
 
     let cipher = "";
     const lowerCasePos = getPos(text);
