@@ -1,8 +1,12 @@
+import { useContext } from "react";
+import { DisclosureContext } from "../context/disclosure";
+
 /*---------------------------------------- UI Component ----------------------------------------*/
 import { Box, Heading, useMediaQuery } from "@chakra-ui/react";
 import { LockIcon, HamburgerIcon } from "@chakra-ui/icons";
 
-const TopBar = ({ onOpen }) => {
+const TopBar = () => {
+  const { onOpen } = useContext(DisclosureContext);
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
   return (
     <Box

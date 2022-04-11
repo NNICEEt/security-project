@@ -1,5 +1,6 @@
 import { useEffect, useContext } from "react";
 import { PanelContext } from "../context/panel";
+import { DisclosureContext } from "../context/disclosure";
 
 /*---------------------------------------- UI Component ----------------------------------------*/
 import {
@@ -28,9 +29,10 @@ const menu = [
   { label: "RSA", panel: panel.rsa },
 ];
 
-const Sidebar = ({ isOpen, onClose }) => {
+const Sidebar = () => {
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
   const { selectedPanel, setSelectedPanel } = useContext(PanelContext);
+  const { isOpen, onClose } = useContext(DisclosureContext);
 
   useEffect(() => {
     isLargerThan768 && onClose();
