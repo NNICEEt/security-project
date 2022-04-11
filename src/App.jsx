@@ -9,7 +9,7 @@ import Layout, {
 } from "./layout/Layout";
 import TopBar from "./components/TopBar";
 import Sidebar from "./components/Sidebar";
-import Panel from "./components/Panel";
+import Panel from "./panels/Panel";
 
 const App = () => {
   return (
