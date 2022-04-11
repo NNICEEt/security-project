@@ -26,11 +26,9 @@ const useViginereCipher = () => {
       textCode.push(text.toUpperCase().charCodeAt(x));
     }
 
-    const keyCode = [];
-    for (let x = 0; x < key.length; x++) {
-      keyCode.push(key.toUpperCase().charCodeAt(x));
-    }
-    keyCode.push(textCode.map((_, index) => keyCode[index % key.length]));
+    const keyCode = [...Array(textCode.length)].map(
+      (_, index) => key[index % key.length]
+    );
 
     let plaintext = "";
     const lowerCasePos = getPos(text);
