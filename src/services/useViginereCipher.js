@@ -5,8 +5,8 @@ const useViginereCipher = () => {
       textCode.push(text.toUpperCase().charCodeAt(i));
     }
 
-    const keyCode = [...Array(textCode.length)].map(
-      (_, index) => key[index % key.length]
+    const keyCode = [...Array(textCode.length)].map((_, index) =>
+      key.toUpperCase().charCodeAt(index % key.length)
     );
 
     let cipher = "";
@@ -26,8 +26,8 @@ const useViginereCipher = () => {
       textCode.push(text.toUpperCase().charCodeAt(x));
     }
 
-    const keyCode = [...Array(textCode.length)].map(
-      (_, index) => key[index % key.length]
+    const keyCode = [...Array(textCode.length)].map((_, index) =>
+      key.toUpperCase().charCodeAt(index % key.length)
     );
 
     let plaintext = "";

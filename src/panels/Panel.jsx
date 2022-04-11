@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { PanelContext } from "../context/panel";
 
 /*---------------------------------------- UI Component ----------------------------------------*/
-import { Box, NumberInput, NumberInputField } from "@chakra-ui/react";
+import { Box, NumberInput, NumberInputField, Button } from "@chakra-ui/react";
 
 import useViginereCipher from "../services/useViginereCipher";
 
@@ -13,20 +13,13 @@ const Panel = () => {
   const { selectedPanel } = useContext(PanelContext);
   const { encrypt, decrypt } = useViginereCipher();
 
-  console.log(encrypt("engineer", "pim"));
+  console.log(encrypt("Engineer", "pim"));
 
   return (
     <Box>
       {selectedPanel === panel.caesarCipher && (
         <Box>
-          <NumberInput
-            defaultValue={0}
-            min={0}
-            keepWithinRange={true}
-            clampValueOnBlur={true}
-          >
-            <NumberInputField />
-          </NumberInput>
+          <Button></Button>
         </Box>
       )}
       {selectedPanel === panel.vigenereCipher && <Box>Vigenere Cipher</Box>}
