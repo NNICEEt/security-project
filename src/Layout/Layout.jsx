@@ -6,8 +6,8 @@ export const Layout = ({ children }) => {
     <Box
       minHeight={"100vh"}
       bgColor={"blue.50"}
-      display={"grid"}
-      gridTemplateRows={"auto 1fr"}
+      display={{ base: "block", md: "grid" }}
+      gridTemplateRows={{ base: "1fr", md: "auto 1fr" }}
       gridTemplateColumns={{ base: "1fr", md: "minmax(200px,1fr) 5fr" }}
     >
       {children}
