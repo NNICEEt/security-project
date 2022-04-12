@@ -4,7 +4,7 @@ import useViginere from "../services/useViginereCipher";
 /*---------------------------------------- UI Component ----------------------------------------*/
 import { Box, Input, Text, Textarea, Button } from "@chakra-ui/react";
 
-const Viginere = () => {
+const Vigenere = () => {
   //Encrypt
   const [enInputText, setEnInputText] = useState("");
   const [enKeyInput, setEnKeyInput] = useState("");
@@ -35,7 +35,7 @@ const Viginere = () => {
       bgColor={"white"}
       display={"flex"}
       flexDirection={{ base: "column", lg: "row" }}
-      borderRadius={10}
+      rounded={"md"}
       border={"1px"}
       borderColor={"blackAlpha.200"}
       boxShadow="base"
@@ -147,4 +147,4 @@ const Viginere = () => {
   );
 };
 
-export default Viginere;
+export default Vigenere;

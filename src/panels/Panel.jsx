@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { PanelContext } from "../context/panel";
 
 /*---------------------------------------- Component ----------------------------------------*/
-import Viginere from "./Viginere";
+import Vigenere from "./Vigenere";
 
 /*---------------------------------------- UI Component ----------------------------------------*/
 import { Box } from "@chakra-ui/react";
@@ -16,7 +16,7 @@ const Panel = () => {
   return (
     <Box p={5}>
       {selectedPanel === panel.caesarCipher && <Box>caesarCipher</Box>}
-      {selectedPanel === panel.vigenereCipher && <Viginere />}
+      {selectedPanel === panel.vigenereCipher && <Vigenere />}
       {selectedPanel === panel.railFenceCipher && <Box>Rail Fence Cipher</Box>}
       {selectedPanel === panel.rsa && <Box>RSA</Box>}
     </Box>

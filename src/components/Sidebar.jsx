@@ -75,7 +75,7 @@ const SidebarDesktop = ({ selectedPanel, setSelectedPanel }) => {
               bgColor={
                 selectedPanel === item.panel ? "green.200" : "transparent"
               }
-              borderRadius={10}
+              rounded={"lg"}
               onClick={() => setSelectedPanel(item.panel)}
               _hover={selectedPanel !== item.panel && { color: "green.400" }}
               _focus={{ outline: "none" }}
@@ -163,7 +163,7 @@ const SidebarMobile = ({
                   bgColor={
                     selectedPanel === item.panel ? "green.200" : "transparent"
                   }
-                  borderRadius={10}
+                  rounded={"lg"}
                   onClick={() => {
                     setSelectedPanel(item.panel);
                     onClose();
