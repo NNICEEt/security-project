@@ -7,7 +7,17 @@ const rsaService = () => {
     const data = res.data;
     return data.result;
   };
-  return { generateKey };
+  const encrypt = async(plaintext,key) => {
+    const res = await axios.post(api.rsa.encrypt,{plaintext,key});
+    const data = res.data;
+    return data.result;
+};
+const decrypt = async(cipherText,key) =>{
+    const res = await axios.post(api.rsa.decrypt,{cipherText,key});
+    const data = res.data;
+    return data.result;
+};
+  return { generateKey,encrypt,decrypt };
 };
 
 export default rsaService;
