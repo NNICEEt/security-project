@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DisclosureContext } from "../Contexts/disclosure";
+import { DisclosureContext } from "../contexts/disclosure";
 
 /*---------------------------------------- UI Component ----------------------------------------*/
 import { Box, Heading, useMediaQuery } from "@chakra-ui/react";
