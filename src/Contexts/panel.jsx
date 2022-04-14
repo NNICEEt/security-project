@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { panel } from "../utils/panel";
+import { panel } from "../Utils/panel";
 
 export const PanelContext = createContext();
 

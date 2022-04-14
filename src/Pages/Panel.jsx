@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { PanelContext } from "../context/panel";
+import { PanelContext } from "../Contexts/panel";
 
 /*---------------------------------------- Component ----------------------------------------*/
 import Vigenere from "./Vigenere";
@@ -8,7 +8,7 @@ import Vigenere from "./Vigenere";
 import { Box } from "@chakra-ui/react";
 
 /*---------------------------------------- Util ----------------------------------------*/
-import { panel } from "../utils/panel";
+import { panel } from "../Utils/panel";
 
 const Panel = () => {
   const { selectedPanel } = useContext(PanelContext);

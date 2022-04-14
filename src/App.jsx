@@ -1,15 +1,15 @@
-import { PanelProvider } from "./context/panel";
-import { DisclosureProvider } from "./context/disclosure";
+import { PanelProvider } from "./Contexts/panel";
+import { DisclosureProvider } from "./Contexts/disclosure";
 
 /*---------------------------------------- Component ----------------------------------------*/
 import Layout, {
   TopbarLayout,
   SidebarLayout,
   ContentLayout,
-} from "./layout/Layout";
-import TopBar from "./components/TopBar";
-import Sidebar from "./components/Sidebar";
-import Panel from "./panels/Panel";
+} from "./Layout/Layout";
+import TopBar from "./Components/TopBar";
+import Sidebar from "./Components/Sidebar";
+import Panel from "./Pages/Panel";
 
 const App = () => {
   return (

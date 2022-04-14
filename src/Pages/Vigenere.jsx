@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useViginere from "../services/useViginereCipher";
+import useViginere from "../Services/useViginereCipher";
 
 /*---------------------------------------- UI Component ----------------------------------------*/
 import { Box, Input, Text, Textarea, Button } from "@chakra-ui/react";

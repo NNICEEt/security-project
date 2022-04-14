@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
-import { PanelContext } from "../context/panel";
-import { DisclosureContext } from "../context/disclosure";
+import { PanelContext } from "../Contexts/panel";
+import { DisclosureContext } from "../Contexts/disclosure";
 
 /*---------------------------------------- UI Component ----------------------------------------*/
 import {
@@ -20,7 +20,7 @@ import {
 import { LockIcon, CloseIcon } from "@chakra-ui/icons";
 
 /*---------------------------------------- Util ----------------------------------------*/
-import { panel } from "../utils/panel";
+import { panel } from "../Utils/panel";
 
 const menu = [
   { label: "Caesar Cipher", panel: panel.caesarCipher },
