@@ -2,8 +2,8 @@ import axios from "axios";
 import { api } from "./apiConstants";
 
 const ceasarService = () => {
-  const encrypt = async(plaintext,key) => {
-      const res = await axios.post(api.caesarCipher.encrypt,{plaintext,key});
+  const encrypt = async(plainText,key) => {
+      const res = await axios.post(api.caesarCipher.encrypt,{plainText,key});
       const data = res.data;
       return data.result;
   };

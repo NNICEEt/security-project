@@ -1,39 +1,35 @@
 import { useContext } from "react";
 import { PanelContext } from "../contexts/panel";
 import rsaService from "../services/rsaService";
-
+import ceasarService from "../services/ceasarService";
+import railFenceCipher from "../services/railFenceService";
+import vigenereService from "../services/viginereService";
 /*---------------------------------------- Component ----------------------------------------*/
-import Vigenere from "./Vigenere";
+import Form from "./Form";
 
 /*---------------------------------------- UI Component ----------------------------------------*/
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
 /*---------------------------------------- Util ----------------------------------------*/
 import { panel } from "../utils/panel";
 
-const Panel = () => {
+const Index = () => {
   const { selectedPanel } = useContext(PanelContext);
-  const { generateKey } = rsaService();
-
-  const test = async () => {
-    const data = await generateKey(256);
-    console.log(data);
-  };
-
-  console.log("re-render")
 
   return (
     <Box p={5}>
       {selectedPanel === panel.caesarCipher && (
-        <Box>
-          <button onClick={test}>caesarCipher</button>
-        </Box>
+        <Form cipher={ceasarService} type={"number"} name={panel.caesarCipher} />
       )}
-      {selectedPanel === panel.vigenereCipher && <Vigenere />}
-      {selectedPanel === panel.railFenceCipher && <Box>Rail Fence Cipher</Box>}
+      {selectedPanel === panel.vigenereCipher && (
+        <Form cipher={vigenereService} type={"text"} name={panel.vigenereCipher} />
+      )}
+      {selectedPanel === panel.railFenceCipher && (
+        <Form cipher={railFenceCipher} type={"number"} name={panel.railFenceCipher} />
+      )}
       {selectedPanel === panel.rsa && <Box>RSA</Box>}
     </Box>
   );
 };
 
-export default Panel;
+export default Index;

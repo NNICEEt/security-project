@@ -2,8 +2,8 @@ import axios from "axios";
 import { api } from "./apiConstants";
 
 const railFenceCipher = () => {
-  const encrypt = async(plaintext,key) => {
-      const res = await axios.post(api.railFenceCipher.encrypt,{plaintext,key});
+  const encrypt = async(plainText,key) => {
+      const res = await axios.post(api.railFenceCipher.encrypt,{plainText,key});
       const data = res.data;
       return data.result;
   };

@@ -9,7 +9,7 @@ import Layout, {
 } from "./layout/Layout";
 import TopBar from "./components/TopBar";
 import Sidebar from "./components/Sidebar";
-import Panel from "./pages/Panel";
+import Index from "./pages/Index";
 
 const App = () => {
   return (
@@ -24,7 +24,7 @@ const App = () => {
           </SidebarLayout>
         </DisclosureProvider>
         <ContentLayout>
-          <Panel />
+          <Index />
         </ContentLayout>
       </Layout>
     </PanelProvider>

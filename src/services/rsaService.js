@@ -7,8 +7,8 @@ const rsaService = () => {
     const data = res.data;
     return data.result;
   };
-  const encrypt = async(plaintext,key) => {
-    const res = await axios.post(api.rsa.encrypt,{plaintext,key});
+  const encrypt = async(plainText,key) => {
+    const res = await axios.post(api.rsa.encrypt,{plainText,key});
     const data = res.data;
     return data.result;
 };
