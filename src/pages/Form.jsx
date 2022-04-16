@@ -157,6 +157,7 @@ const FormCipher = ({ input, setInput, method, onSubmit, type, isLoading }) => {
       </Box>
       <Textarea
         minHeight={200}
+        resize={"none"}
         focusBorderColor={"green.200"}
         placeholder="Result"
         value={result}

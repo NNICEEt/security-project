@@ -4,6 +4,8 @@ import rsaService from "../services/rsaService";
 import ceasarService from "../services/ceasarService";
 import railFenceCipher from "../services/railFenceService";
 import vigenereService from "../services/viginereService";
+import RSA from "../pages/RSA";
+
 /*---------------------------------------- Component ----------------------------------------*/
 import Form from "./Form";
 
@@ -27,7 +29,9 @@ const Index = () => {
       {selectedPanel === panel.railFenceCipher && (
         <Form cipher={railFenceCipher} type={"number"} name={panel.railFenceCipher} />
       )}
-      {selectedPanel === panel.rsa && <Box>RSA</Box>}
+      {selectedPanel === panel.rsa && 
+        <RSA cipher={rsaService}/>
+      }
     </Box>
   );
 };
