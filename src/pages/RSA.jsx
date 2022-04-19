@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 /*---------------------------------------- UI Component ----------------------------------------*/
 import {
   Box,
-  Input,
   Text,
   Textarea,
   Button,
@@ -11,9 +10,6 @@ import {
   Heading,
   useClipboard,
   Select,
-  Radio,
-  RadioGroup,
-  Stack,
 } from "@chakra-ui/react";
 import { CopyIcon, CheckIcon } from "@chakra-ui/icons";
 
@@ -22,6 +18,7 @@ const Form = ({ cipher }) => {
   const [publicKey, setPublicKey] = useState("");
   const [privateKey, setPrivateKey] = useState("");
 
+  const [isLoadingKey, setIsLoadingKey] = useState(false);
   const [isLoadingEn, setIsLoadingEn] = useState(false);
   const [isLoadingDe, setIsLoadingDe] = useState(false);
   const [enInput, setEnInput] = useState({
@@ -34,7 +31,6 @@ const Form = ({ cipher }) => {
     key: "",
     result: "",
   });
-  
 
   const onEncrypt = async () => {
     setIsLoadingEn(true);
@@ -51,12 +47,13 @@ const Form = ({ cipher }) => {
   };
 
   const { generateKey, encrypt, decrypt } = cipher();
-  
 
   const genKey = async (keySize) => {
+    setIsLoadingKey(true);
     const result = await generateKey(keySize);
     setPrivateKey(result.privateKey);
     setPublicKey(result.publicKey);
+    setIsLoadingKey(false);
   };
   return (
     <Box bgColor={"white"}>
@@ -70,42 +67,37 @@ const Form = ({ cipher }) => {
         display={"flex"}
         flexDirection={{ base: "column", md: "row" }}
         gap={{ base: 5, md: 10 }}
+        px={3}
       >
         <Select
           maxWidth={{ base: "100%", md: 300 }}
-          placeholder="Select Key Size"
+          placeholder={"Select key size"}
           onChange={(e) => {
             setKeySize(e.target.value);
           }}
         >
-          <option value={256}>256 bit</option>
           <option value={512}>512 bit</option>
           <option value={1024}>1024 bit</option>
         </Select>
         <Button
-         
           color={"white"}
           _hover={{ bgColor: "green.400" }}
           bgColor={"green.300"}
-          size="md"
+          size={"md"}
+          disabled={!keySize}
+          isLoading={isLoadingKey}
           onClick={() => genKey(keySize)}
         >
           Generate Key
         </Button>
       </Box>
       <Box display={"flex"} flexDirection={{ base: "column", lg: "row" }}>
-        <Reform2
-        method={"Public Key"}
-        key = {publicKey}
-        />
+        <GenarateKeyDisplay method={"Public Key"} keys={publicKey} />
         <Box w={"2px"} bgColor={"blackAlpha.400"}></Box>
-        <Reform2
-        method={"Private Key"}
-        key = {privateKey}
-        />
+        <GenarateKeyDisplay method={"Private Key"} keys={privateKey} />
       </Box>
       <Box display={"flex"} flexDirection={{ base: "column", lg: "row" }}>
-        <Reform
+        <EncryptionForm
           input={enInput}
           setInput={setEnInput}
           method={"Encrypt"}
@@ -113,7 +105,7 @@ const Form = ({ cipher }) => {
           isLoading={isLoadingEn}
         />
         <Box w={"2px"} bgColor={"blackAlpha.400"}></Box>
-        <Reform
+        <EncryptionForm
           input={deInput}
           setInput={setDeInput}
           method={"Decrypt"}
@@ -125,39 +117,36 @@ const Form = ({ cipher }) => {
   );
 };
 
-const Reform2 = ({method, key}) => {
-  console.log("aaaaaaa"+key);
-  const { hasCopied, onCopy } = useClipboard({key});
+const GenarateKeyDisplay = ({ method, keys }) => {
+  const { hasCopied, onCopy } = useClipboard(keys);
   return (
     <Box flex={1} p={5}>
-    <Text p={3} fontSize={"3xl"} fontWeight={300}>
-      {method}
-    </Text>
-    <Box
-    display={"flex"}
-    justifyContent={"flex-end"}>
-    <IconButton
-      bgColor={"green.300"}
-      color={"white"}
-      icon={hasCopied ? <CheckIcon /> : <CopyIcon />}
-      _hover={{ bgColor: "green.400" }}
-      _focus={{ outline: "none" }}
-      onClick={onCopy}
-    />
+      <Box display={"flex"} justifyContent={"space-between"}>
+        <Text fontSize={"3xl"} fontWeight={300}>
+          {method}
+        </Text>
+        <IconButton
+          bgColor={"green.300"}
+          color={"white"}
+          icon={hasCopied ? <CheckIcon /> : <CopyIcon />}
+          _hover={{ bgColor: "green.400" }}
+          _focus={{ outline: "none" }}
+          onClick={onCopy}
+        />
+      </Box>
+
+      <Textarea
+        resize={"none"}
+        minHeight={200}
+        isReadOnly
+        placeholder={method}
+        value={keys}
+      />
     </Box>
-    
-    <Textarea
-      resize={"none"}
-      minHeight={200}
-      isReadOnly
-      placeholder={method}
-      value={key}
-    />
-  </Box>
   );
 };
 
-const Reform = ({ input, setInput, method, onSubmit, isLoading }) => {
+const EncryptionForm = ({ input, setInput, method, onSubmit, isLoading }) => {
   const { text, key, result } = input;
   const { hasCopied, onCopy } = useClipboard(result);
   const handleChange = (e) => {
@@ -175,7 +164,9 @@ const Reform = ({ input, setInput, method, onSubmit, isLoading }) => {
         {method + "ion"}
       </Text>
       <Text p={3} fontSize={"lg"}>
-        {method === "Encrypt" ? "Plain Text" : "Cipher Text"}
+        {method === "Encrypt"
+          ? `Plain Text (${text.length}/65)`
+          : "Cipher Text"}
       </Text>
       <Textarea
         resize={"none"}
@@ -183,7 +174,11 @@ const Reform = ({ input, setInput, method, onSubmit, isLoading }) => {
         minHeight={200}
         placeholder={method === "Encrypt" ? "Plain Text" : "Cipher Text"}
         value={text}
-        onChange={handleChange}
+        onChange={(e) => {
+          method === "Encrypt"
+            ? e.target.value.length < 65 && handleChange(e)
+            : handleChange(e);
+        }}
       />
       <Text p={3} fontSize={"lg"}>
         Enter Public/Private Key

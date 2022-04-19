@@ -10,7 +10,7 @@ import RSA from "../pages/RSA";
 import Form from "./Form";
 
 /*---------------------------------------- UI Component ----------------------------------------*/
-import { Box, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 /*---------------------------------------- Util ----------------------------------------*/
 import { panel } from "../utils/panel";
