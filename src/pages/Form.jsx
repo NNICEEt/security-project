@@ -151,6 +151,7 @@ const FormCipher = ({ input, setInput, method, onSubmit, type, isLoading }) => {
           icon={hasCopied ? <CheckIcon /> : <CopyIcon />}
           _focus={{ outline: "none" }}
           onClick={onCopy}
+          disabled={!(result)}
         />
       </Box>
       <Textarea
