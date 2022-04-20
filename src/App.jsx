@@ -10,6 +10,7 @@ import Layout, {
 import TopBar from "./components/TopBar";
 import Sidebar from "./components/Sidebar";
 import Index from "./pages/Index";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
           <Index />
         </ContentLayout>
       </Layout>
+      <ScrollToTop />
     </PanelProvider>
   );
 };

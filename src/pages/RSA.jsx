@@ -11,6 +11,7 @@ import {
   useClipboard,
   Select,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
 import { CopyIcon, CheckIcon } from "@chakra-ui/icons";
 
@@ -32,18 +33,37 @@ const Form = ({ cipher }) => {
     key: "",
     result: "",
   });
+  const toast = useToast();
 
   const onEncrypt = async () => {
+    setEnInput({ ...enInput, result: "" });
     setIsLoadingEn(true);
-    const result = await encrypt(enInput.text, enInput.key);
-    setEnInput({ ...enInput, result: result.cipherText });
+    const { data, isSuccess } = await encrypt(enInput.text, enInput.key);
+    if (isSuccess) setEnInput({ ...enInput, result: data.cipherText });
+    else
+      toast({
+        position: "top",
+        title: data,
+        status: "error",
+        duration: 2500,
+        isClosable: true,
+      });
     setIsLoadingEn(false);
   };
 
   const onDecrypt = async () => {
+    setDeInput({ ...deInput, result: "" });
     setIsLoadingDe(true);
-    const result = await decrypt(deInput.text, deInput.key);
-    setDeInput({ ...deInput, result: result.plainText });
+    const { data, isSuccess } = await decrypt(deInput.text, deInput.key);
+    if (isSuccess) setDeInput({ ...deInput, result: data.plainText });
+    else
+      toast({
+        position: "top",
+        title: data,
+        status: "error",
+        duration: 2500,
+        isClosable: true,
+      });
     setIsLoadingDe(false);
   };
 
@@ -57,12 +77,14 @@ const Form = ({ cipher }) => {
     setIsLoadingKey(false);
   };
   return (
-    <Box bgColor={useColorModeValue("white", "gray.800")}
-    rounded={"md"}
+    <Box
+      bgColor={useColorModeValue("white", "gray.800")}
+      rounded={"md"}
       border={"1px"}
       borderColor={"blackAlpha.200"}
       boxShadow="base"
-      p={5}>
+      p={5}
+    >
       <Heading px={2} pt={1} color={"primary"} fontWeight={500}>
         RSA Cipher
       </Heading>
@@ -136,7 +158,7 @@ const GenarateKeyDisplay = ({ method, keys }) => {
           _hover={{ bgColor: "green.400" }}
           _focus={{ outline: "none" }}
           onClick={onCopy}
-          disabled={!(keys)}
+          disabled={!keys}
         />
       </Box>
 
@@ -223,7 +245,7 @@ const EncryptionForm = ({ input, setInput, method, onSubmit, isLoading }) => {
           _hover={{ bgColor: "green.400" }}
           _focus={{ outline: "none" }}
           onClick={onCopy}
-          disabled={!(result)}
+          disabled={!result}
         />
       </Box>
       <Textarea
