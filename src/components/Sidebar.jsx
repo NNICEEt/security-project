@@ -118,7 +118,7 @@ const SidebarMobile = ({
           borderBottom={"1px"}
           borderColor={useColorModeValue("blackAlpha.300", "whiteAlpha.500")}
         >
-          <LockIcon color={"green.400"} fontSize={{ base: "sm", sm: "md" }} />
+          <LockIcon color={"green.400"} fontSize={{ base: "xl", sm: "2xl" }} />
           <Box
             display={"flex"}
             alignItems={"center"}
@@ -127,7 +127,7 @@ const SidebarMobile = ({
             _before={{
               content: `""`,
               width: "70px",
-              height: "10px",
+              height: "5px",
               background: "green.200",
               position: "absolute",
               bottom: 0,
@@ -136,13 +136,13 @@ const SidebarMobile = ({
           >
             <Heading
               color={"primary"}
-              fontSize={"md"}
+              fontSize={"2xl"}
               fontWeight={500}
               position={"relative"}
             >
               Cipher
             </Heading>
-            <Heading fontWeight={500} fontSize={"md"} position={"relative"}>
+            <Heading fontWeight={500} fontSize={"2xl"} position={"relative"}>
               Crytography
             </Heading>
           </Box>

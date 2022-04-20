@@ -37,12 +37,12 @@ const TopBar = () => {
           transform={"auto"}
           translateY={"5%"}
           onClick={onOpen}
-          fontSize={{ base: "sm", sm: "md" }}
+          fontSize={{ base: "2xl", sm: "3xl" }}
         />
       )}
       <LockIcon
         color={"primary"}
-        fontSize={{ base: "sm", sm: "md", md: "xl" }}
+        fontSize={{ base: "md", sm: "md", md: "xl" }}
         transform={"auto"}
         translateY={{ base: "0%", md: "10%" }}
       />
@@ -53,8 +53,8 @@ const TopBar = () => {
         position={"relative"}
         _before={{
           content: `""`,
-          width: { base: "65px", sm: "75px", md: "90px" },
-          height: { base: "6px", sm: "8px" },
+          width: { base: "52px", sm: "75px", md: "90px" },
+          height: { base: "5px", sm: "8px" },
           background: "green.200",
           position: "absolute",
           bottom: 0,
@@ -63,7 +63,7 @@ const TopBar = () => {
       >
         <Heading
           color={"primary"}
-          fontSize={{ base: "sm", sm: "2xl", md: "3xl" }}
+          fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
           fontWeight={500}
           position={"relative"}
         >
@@ -71,7 +71,7 @@ const TopBar = () => {
         </Heading>
         <Heading
           fontWeight={500}
-          fontSize={{ base: "sm", sm: "xl", md: "2xl" }}
+          fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
           position={"relative"}
         >
           Crytography
