@@ -13,6 +13,10 @@ const Button = {
       _hover: {
         bgColor: mode(darken("primary", 5), whiten("primary", 10))(props),
         boxShadow: "md",
+        _disabled: {
+          bgColor: "primary",
+          boxShadow: "none",
+        },
       },
     }),
   },

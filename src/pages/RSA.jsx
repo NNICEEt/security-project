@@ -82,7 +82,7 @@ const Form = ({ cipher }) => {
         <Button
           variant={"primary"}
           size={"md"}
-          disabled={!keySize}
+          disabled={!keySize || isLoadingKey}
           isLoading={isLoadingKey}
           onClick={() => genKey(keySize)}
         >

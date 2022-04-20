@@ -4,6 +4,7 @@ import Button from "./components/button";
 import IconButton from "./components/iconButton";
 import Textarea from "./components/textarea";
 import Input from "./components/input";
+import Select from "./components/select";
 
 const config = {
   initialColorMode: localStorage.getItem("chakra-ui-color-mode"),
@@ -25,6 +26,7 @@ const theme = extendTheme({
     IconButton,
     Textarea,
     Input,
+    Select,
   },
 });
 
