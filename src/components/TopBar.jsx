@@ -74,7 +74,7 @@ const TopBar = () => {
           fontSize={{ base: "xl", sm: "2xl", md: "3xl" }}
           position={"relative"}
         >
-          Crytography
+          Cryptography
         </Heading>
       </Box>
       <IconButton

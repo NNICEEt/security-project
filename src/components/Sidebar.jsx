@@ -143,7 +143,7 @@ const SidebarMobile = ({
               Cipher
             </Heading>
             <Heading fontWeight={500} fontSize={"2xl"} position={"relative"}>
-              Crytography
+              Cryptography
             </Heading>
           </Box>
           <CloseIcon
