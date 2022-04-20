@@ -1,11 +1,11 @@
 /*---------------------------------------- UI Component ----------------------------------------*/
-import { Box } from "@chakra-ui/react";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 
 export const Layout = ({ children }) => {
   return (
     <Box
       minHeight={"100vh"}
-      bgColor={"blue.50"}
+      bgColor={useColorModeValue("blue.50", "gray.900")}
       display={{ base: "block", md: "grid" }}
       gridTemplateRows={{ base: "1fr", md: "auto 1fr" }}
       gridTemplateColumns={{ base: "1fr", md: "minmax(200px,1fr) 5fr" }}

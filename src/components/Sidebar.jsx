@@ -16,6 +16,7 @@ import {
   useMediaQuery,
   DrawerContent,
   useBreakpointValue,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { LockIcon, CloseIcon } from "@chakra-ui/icons";
 
@@ -58,27 +59,27 @@ const Sidebar = () => {
 };
 
 const SidebarDesktop = ({ selectedPanel, setSelectedPanel }) => {
+  const bg = useColorModeValue("white", "gray.800");
+  const tabBg = useColorModeValue("green.300", "primary");
   return (
     <Box
       p={4}
       height={"100%"}
-      bgColor={"white"}
+      bgColor={bg}
       borderRight={"1px"}
-      borderColor={"blackAlpha.200"}
+      borderColor={"blackAlpha.300"}
     >
-      <Tabs variant="unstyled" colorScheme="green">
+      <Tabs variant="unstyled">
         <TabList display={"flex"} flexDirection="column" gap={5}>
           {menu.map((item, index) => (
             <Tab
               key={index}
               p={4}
-              bgColor={
-                selectedPanel === item.panel ? "green.200" : "transparent"
-              }
+              bgColor={selectedPanel === item.panel ? tabBg : "transparent"}
               rounded={"lg"}
-              onClick={() => setSelectedPanel(item.panel)}
-              _hover={selectedPanel !== item.panel && { color: "green.400" }}
+              _hover={selectedPanel !== item.panel && { color: "primary" }}
               _focus={{ outline: "none" }}
+              onClick={() => setSelectedPanel(item.panel)}
             >
               {item.label}
             </Tab>
@@ -96,16 +97,18 @@ const SidebarMobile = ({
   setSelectedPanel,
 }) => {
   const sizes = useBreakpointValue({ base: "full", sm: "xs" });
+  const bg = useColorModeValue("white", "gray.800");
+  const tabBg = useColorModeValue("green.300", "primary");
   return (
     <Drawer
+      p={4}
       placement={"left"}
       size={sizes}
       isOpen={isOpen}
       onClose={onClose}
-      p={4}
     >
       <DrawerOverlay />
-      <DrawerContent>
+      <DrawerContent bgColor={bg}>
         <DrawerHeader
           py={6}
           display={"flex"}
@@ -113,7 +116,7 @@ const SidebarMobile = ({
           justifyContent={"center"}
           alignItems={"center"}
           borderBottom={"1px"}
-          borderColor={"blackAlpha.300"}
+          borderColor={useColorModeValue("blackAlpha.300", "whiteAlpha.500")}
         >
           <LockIcon color={"green.400"} fontSize={{ base: 24, sm: 28 }} />
           <Box
@@ -132,7 +135,7 @@ const SidebarMobile = ({
             }}
           >
             <Heading
-              color={"green.400"}
+              color={"primary"}
               fontSize={24}
               fontWeight={500}
               position={"relative"}
@@ -160,9 +163,7 @@ const SidebarMobile = ({
                 <Tab
                   key={index}
                   p={4}
-                  bgColor={
-                    selectedPanel === item.panel ? "green.200" : "transparent"
-                  }
+                  bgColor={selectedPanel === item.panel ? tabBg : "transparent"}
                   rounded={"lg"}
                   onClick={() => {
                     setSelectedPanel(item.panel);

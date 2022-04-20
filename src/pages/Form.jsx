@@ -10,6 +10,7 @@ import {
   IconButton,
   Heading,
   useClipboard,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { CopyIcon, CheckIcon } from "@chakra-ui/icons";
 
@@ -45,14 +46,14 @@ const Form = ({ cipher, type, name }) => {
 
   return (
     <Box
-      bgColor={"white"}
+      bgColor={useColorModeValue("white", "gray.800")}
       rounded={"md"}
       border={"1px"}
       borderColor={"blackAlpha.200"}
       boxShadow="base"
       p={5}
     >
-      <Heading px={2} pt={1} color={"green.400"} fontWeight={500}>
+      <Heading px={2} pt={1} color={"primary"} fontWeight={500}>
         {name}
       </Heading>
       <Box display={"flex"} flexDirection={{ base: "column", lg: "row" }}>
@@ -64,7 +65,10 @@ const Form = ({ cipher, type, name }) => {
           type={type}
           isLoading={isLoadingEn}
         />
-        <Box w={"2px"} bgColor={"blackAlpha.400"}></Box>
+        <Box
+          w={useColorModeValue("2px", "1px")}
+          bgColor={useColorModeValue("blackAlpha.400", "whiteAlpha.400")}
+        ></Box>
         <FormCipher
           input={deInput}
           setInput={setDeInput}
@@ -99,10 +103,9 @@ const FormCipher = ({ input, setInput, method, onSubmit, type, isLoading }) => {
         {method === "Encrypt" ? "Plain Text" : "Cipher Text"}
       </Text>
       <Textarea
-        name={"text"}
         minHeight={200}
-        focusBorderColor={"green.200"}
         resize={"none"}
+        name={"text"}
         placeholder={method === "Encrypt" ? "Plain Text" : "Cipher Text"}
         value={text}
         onChange={handleChange}
@@ -120,19 +123,16 @@ const FormCipher = ({ input, setInput, method, onSubmit, type, isLoading }) => {
         <Input
           name={"key"}
           maxWidth={{ base: "100%", md: 300 }}
-          focusBorderColor={"green.200"}
           placeholder="Key"
           value={key}
           onChange={handleChange}
           type={type}
         />
         <Button
-          bgColor={"green.300"}
-          color={"white"}
-          _hover={{ bgColor: "green.400" }}
+          variant={"primary"}
           isLoading={isLoading}
           onClick={onSubmit}
-          disabled={!(text && key)}
+          disabled={!(text && key) || isLoading}
         >
           {method}
         </Button>
@@ -147,10 +147,8 @@ const FormCipher = ({ input, setInput, method, onSubmit, type, isLoading }) => {
           Result
         </Text>
         <IconButton
-          bgColor={"green.300"}
-          color={"white"}
+          variant={"primary"}
           icon={hasCopied ? <CheckIcon /> : <CopyIcon />}
-          _hover={{ bgColor: "green.400" }}
           _focus={{ outline: "none" }}
           onClick={onCopy}
         />

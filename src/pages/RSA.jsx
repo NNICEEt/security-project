@@ -57,7 +57,7 @@ const Form = ({ cipher }) => {
   };
   return (
     <Box bgColor={"white"}>
-      <Heading px={2} pt={1} color={"green.400"} fontWeight={500}>
+      <Heading px={2} pt={1} color={"primary"} fontWeight={500}>
         RSA Cipher
       </Heading>
       <Text p={3} fontSize={"3xl"} fontWeight={300}>
@@ -80,9 +80,7 @@ const Form = ({ cipher }) => {
           <option value={1024}>1024 bit</option>
         </Select>
         <Button
-          color={"white"}
-          _hover={{ bgColor: "green.400" }}
-          bgColor={"green.300"}
+          variant={"primary"}
           size={"md"}
           disabled={!keySize}
           isLoading={isLoadingKey}
@@ -193,9 +191,7 @@ const EncryptionForm = ({ input, setInput, method, onSubmit, isLoading }) => {
       />
       <Box pt={5} display={"flex"} justifyContent={"flex-end"}>
         <Button
-          bgColor={"green.300"}
-          color={"white"}
-          _hover={{ bgColor: "green.400" }}
+          variant={"primary"}
           isLoading={isLoading}
           onClick={onSubmit}
           disabled={!(text && key)}
