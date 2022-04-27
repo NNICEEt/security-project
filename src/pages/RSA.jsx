@@ -193,16 +193,16 @@ const EncryptionForm = ({
 }) => {
   const { text, key, result } = input;
   const { hasCopied, onCopy } = useClipboard(result);
-  const Engpattern = /^[a-zA-Z]+(?: [a-zA-Z-]+)* ?$/;
   const handleChange = (e) => {
     const { target } = e;
     const { name } = target;
-    if (e.match(Engpattern)) {
-      setInput({
-        ...input,
-        [name]: target.value,
-      });
-    }
+    let value = target.value;
+    const thPattern = /[ก-๛]+/;
+    value = value.replace(thPattern, "");
+    setInput({
+      ...input,
+      [name]: value,
+    });
   };
   return (
     <Box flex={1} p={5}>

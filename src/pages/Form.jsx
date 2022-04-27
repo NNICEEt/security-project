@@ -88,10 +88,12 @@ const FormCipher = ({ input, setInput, method, onSubmit, type, isLoading }) => {
   const handleChange = (e) => {
     const { target } = e;
     const { name } = target;
-
+    let value = target.value;
+    const thPattern = /[ก-๛]+/;
+    value = value.replace(thPattern, "");
     setInput({
       ...input,
-      [name]: target.value,
+      [name]: value,
     });
   };
   return (
@@ -151,7 +153,7 @@ const FormCipher = ({ input, setInput, method, onSubmit, type, isLoading }) => {
           icon={hasCopied ? <CheckIcon /> : <CopyIcon />}
           _focus={{ outline: "none" }}
           onClick={onCopy}
-          disabled={!(result)}
+          disabled={!result}
         />
       </Box>
       <Textarea
