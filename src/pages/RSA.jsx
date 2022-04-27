@@ -19,7 +19,7 @@ const Form = ({ cipher }) => {
   const [keySize, setKeySize] = useState("");
   const [publicKey, setPublicKey] = useState("");
   const [privateKey, setPrivateKey] = useState("");
-
+  const [textLimit, settextLimit] = useState("");
   const [isLoadingKey, setIsLoadingKey] = useState(false);
   const [isLoadingEn, setIsLoadingEn] = useState(false);
   const [isLoadingDe, setIsLoadingDe] = useState(false);
@@ -68,14 +68,23 @@ const Form = ({ cipher }) => {
   };
 
   const { generateKey, encrypt, decrypt } = cipher();
-
+  const setLimit = (keysize) => {
+    if (keysize === "512") {
+      settextLimit(120);
+    } else if (keysize === "1024") {
+      settextLimit(240);
+    }
+  };
   const genKey = async (keySize) => {
     setIsLoadingKey(true);
+    setLimit(keySize);
+    setEnInput({ ...enInput, text: "" });
     const result = await generateKey(keySize);
     setPrivateKey(result.privateKey);
     setPublicKey(result.publicKey);
     setIsLoadingKey(false);
   };
+
   return (
     <Box
       bgColor={useColorModeValue("white", "gray.800")}
@@ -129,6 +138,7 @@ const Form = ({ cipher }) => {
           method={"Encrypt"}
           onSubmit={onEncrypt}
           isLoading={isLoadingEn}
+          textLimit={textLimit}
         />
         <Box w={"2px"} bgColor={"blackAlpha.400"}></Box>
         <EncryptionForm
@@ -173,17 +183,26 @@ const GenarateKeyDisplay = ({ method, keys }) => {
   );
 };
 
-const EncryptionForm = ({ input, setInput, method, onSubmit, isLoading }) => {
+const EncryptionForm = ({
+  input,
+  setInput,
+  method,
+  onSubmit,
+  isLoading,
+  textLimit,
+}) => {
   const { text, key, result } = input;
   const { hasCopied, onCopy } = useClipboard(result);
+  const Engpattern = /^[a-zA-Z]+(?: [a-zA-Z-]+)* ?$/;
   const handleChange = (e) => {
     const { target } = e;
     const { name } = target;
-
-    setInput({
-      ...input,
-      [name]: target.value,
-    });
+    if (e.match(Engpattern)) {
+      setInput({
+        ...input,
+        [name]: target.value,
+      });
+    }
   };
   return (
     <Box flex={1} p={5}>
@@ -192,7 +211,9 @@ const EncryptionForm = ({ input, setInput, method, onSubmit, isLoading }) => {
       </Text>
       <Text p={3} fontSize={"lg"}>
         {method === "Encrypt"
-          ? `Plain Text (${text.length}/65)`
+          ? `Plain Text ${
+              textLimit === "" ? "" : `(${text.length}/${textLimit})`
+            }`
           : "Cipher Text"}
       </Text>
       <Textarea
@@ -203,7 +224,7 @@ const EncryptionForm = ({ input, setInput, method, onSubmit, isLoading }) => {
         value={text}
         onChange={(e) => {
           method === "Encrypt"
-            ? e.target.value.length < 65 && handleChange(e)
+            ? e.target.value.length <= textLimit && handleChange(e)
             : handleChange(e);
         }}
       />
