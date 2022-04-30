@@ -4,7 +4,7 @@ import { PanelContext } from "../contexts/panel";
 import rsaService from "../services/rsaService";
 import ceasarService from "../services/ceasarService";
 import railFenceCipher from "../services/railFenceService";
-import vigenereService from "../services/viginereService";
+import vigenereService from "../services/vigenereService";
 
 import { BASE_URL } from "../services/apiConstants";
 /*---------------------------------------- Component ----------------------------------------*/
